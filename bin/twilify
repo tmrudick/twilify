@@ -3,34 +3,37 @@
 var program = require('commander');
 
 program
-    .version('0.0.1')
-    .option('-t, --to', 'Recipient Phone Number')
-    .option('-f, --from', 'Sending Phone Number')
-    .option('-b, --body', 'Message Body')
-    .option('--sid', 'Twilio Account SID')
-    .option('--token', 'Twilio Auth Token')
+    .version('0.0.2')
+    .option('-t, --to <number>', 'Recipient Phone Number')
+    .option('-f, --from <number>', 'Sending Phone Number')
+    .option('-b, --body <message>', 'Message Body')
+    .option('--sid [sid]', 'Twilio Account SID')
+    .option('--token [token]', 'Twilio Auth Token')
     .parse(process.argv);
 
+// Default to environment variables if parameters are missing
 program.from = program.from || process.env['TWILIO_PHONE_NUMBER'];
-
-if (!program.to || !program.from || !program.body) {
-    return console.error('Sender, recipient, and message body are required.');
-}
-
 program.sid = program.sid || process.env['TWILIO_ACCOUNT_SID'];
 program.token = program.token || process.env['TWILIO_AUTH_TOKEN'];
 
-if (!program.sid || !program.token) {
-    return console.error('Twilio Account SID or Auth Token is Missing!');
-}
+// Basic parameter validation
+['to', 'from', 'body', 'sid', 'token'].forEach(function(option) {
+    if (!program[option]) {
+        throw new Error('--' + option + ' is a required parameter');
+    }
+});
 
+// Create the Twilio client
 var client = require('twilio')(program.sid, program.token);
 
+// Send the text message
 client.sendSms({
     to: program.to,
     from: program.from,
     body: program.body
-}, function(err, responseData) {
+}, function(err, res) {
+    // If there is an error, throw it.
+    // If there is no error, quietly exit.
     if (err) {
         throw err;
     }
