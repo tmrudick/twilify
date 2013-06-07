@@ -1,0 +1,24 @@
+{
+  "name": "twilify",
+  "version": "0.0.1",
+  "description": "Sends a text message from the command line with Twilio",
+  "main": "twilify.js",
+  "dependencies": {
+    "twilio": "~1.1.2",
+    "optimist": "~0.5.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tmrudick/twilify"
+  },
+  "keywords": [
+    "twilio",
+    "console"
+  ],
+  "author": "Tom Rudick <tmrudick@gmail.com>",
+  "license": "MIT"
+}
