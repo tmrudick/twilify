@@ -1,11 +1,10 @@
 {
   "name": "twilify",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Sends a text message from the command line with Twilio",
   "main": "twilify.js",
   "dependencies": {
     "twilio": "~1.1.2",
-    "optimist": "~0.5.2",
     "commander": "~1.1.1"
   },
   "bin": {
