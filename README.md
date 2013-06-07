@@ -30,3 +30,5 @@ Monitoring Long Running Processes
 The man reason for twilify is to notify you when a long running process completes either on a local or remote machine.
 
     ./my-long-running-command && twilify -t +15556428832 -b "Your Long Running Process Has Exited"
+
+It is probably a good idea to run the above command in a `screen` or `tmux` session.
